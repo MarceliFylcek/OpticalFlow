@@ -41,10 +41,8 @@ if __name__ == "__main__":
 
             sequence_images.append(image_A)
 
-        with Bar(f"Sequence {sequence_name}") as bar:
+        with Bar(f"Sequence {sequence_name}", max=len(sequence_images)) as bar:
             for image in sequence_images:
-                if image != "100.tiff":
-                    continue
                 bar.next()
                 image_A = io.imread(os.path.join(A_path, image))
                 image_B = io.imread(os.path.join(B_path, image))
@@ -77,6 +75,5 @@ if __name__ == "__main__":
                 image_B_warped[..., 1] = rgb_channels[1]
                 image_B_warped[..., 2] = rgb_channels[2]
 
-                display(image_B_warped, image_A, image_B)
+                # display(image_B_warped, image_A, image_B)
                 save(image_A, image_B_warped, image, (os.path.join(destination_path, sequence_name)))
-                break
